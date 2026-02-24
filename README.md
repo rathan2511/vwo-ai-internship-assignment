@@ -1,6 +1,6 @@
 # Financial Document Analyzer - Debugged & Optimized
 
-## 🛠️ Bugs Found and Fixed
+##  Bugs Found and Fixed
 
 ### 1. Architectural Bugs
 * **Agent Import Error:** Fixed incorrect import `from crewai.agents import Agent` to the correct `from crewai import Agent`.
@@ -17,7 +17,7 @@
 
 ---
 
-## 🚀 Setup Instructions
+##  Setup Instructions
 
 1. **Clone the repository** (if applicable)
 2. **Create a virtual environment:**
