@@ -1,38 +1,26 @@
-# Financial Document Analyzer - Debug Assignment
+# Financial Document Analyzer - Debugged & Optimized
 
-## Project Overview
-A comprehensive financial document analysis system that processes corporate reports, financial statements, and investment documents using AI-powered analysis agents.
+## 🛠️ Bugs Found and Fixed
 
-## Getting Started
+### 1. Architectural Bugs
+* **Agent Import Error:** Fixed incorrect import `from crewai.agents import Agent` to the correct `from crewai import Agent`.
+* **Uvicorn Reload Bug:** Fixed a crash where the `app` object was passed instead of the import string `"main:app"` while `reload=True`.
+* **Dynamic File Handling:** The original code hardcoded `data/sample.pdf`. I modified the system to pass the dynamic `{file_path}` from the FastAPI upload through to the CrewAI agents and tools.
 
-### Install Required Libraries
-```sh
-pip install -r requirement.txt
-```
+### 2. Tooling Bugs
+* **PDF Reader:** The original `FinancialDocumentTool` used an undefined `Pdf` class. I implemented `PyPDFLoader` from `langchain_community` to properly handle PDF extraction.
+* **Tool Decorators:** Converted custom classes into standard CrewAI `@tool` functions for better compatibility.
 
-### Sample Document
-The system analyzes financial documents like Tesla's Q2 2025 financial update.
+### 3. Prompt Engineering (The "Poisoned" Prompts)
+* **Agent Personalities:** The original code instructed agents to hallucinate, make up investment products, and ignore regulatory compliance. I rewrote the `backstory` and `goal` for every agent to ensure professional, factual, and cautious financial analysis.
+* **Task Clarity:** Updated task descriptions to stop the AI from generating fake URLs and contradictory advice.
 
-**To add Tesla's financial document:**
-1. Download the Tesla Q2 2025 update from: https://www.tesla.com/sites/default/files/downloads/TSLA-Q2-2025-Update.pdf
-2. Save it as `data/sample.pdf` in the project directory
-3. Or upload any financial PDF through the API endpoint
+---
 
-**Note:** Current `data/sample.pdf` is a placeholder - replace with actual Tesla financial document for proper testing.
+## 🚀 Setup Instructions
 
-# You're All Not Set!
-🐛 **Debug Mode Activated!** The project has bugs waiting to be squashed - your mission is to fix them and bring it to life.
-
-## Debugging Instructions
-
-1. **Identify the Bug**: Carefully read the code in each file and understand the expected behavior. There is a bug in each line of code. So be careful.
-2. **Fix the Bug**: Implement the necessary changes to fix the bug.
-3. **Test the Fix**: Run the project and verify that the bug is resolved.
-4. **Repeat**: Continue this process until all bugs are fixed.
-
-## Expected Features
-- Upload financial documents (PDF format)
-- AI-powered financial analysis
-- Investment recommendations
-- Risk assessment
-- Market insights
+1. **Clone the repository** (if applicable)
+2. **Create a virtual environment:**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # venv\Scripts\activate on Windows
